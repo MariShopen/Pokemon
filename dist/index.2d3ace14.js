@@ -27219,27 +27219,75 @@ $parcel$ReactRefreshHelpers$0342.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "pokemonFetch", ()=>pokemonFetch);
 parcelHelpers.export(exports, "App", ()=>App);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _button = require("@/components/ui/button");
+var _react = require("react");
+var _pokemonCard = require("./components/PokemonCard");
+var _input = require("@/components/ui/input");
+var _s = $RefreshSig$();
+const pokemonFetch = async (searchPok)=>{
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchPok}`);
+        const jsonData = await response.json();
+        return jsonData;
+    } catch  {
+        console.log("error");
+    }
+};
 function App() {
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+    _s();
+    const [search, setSearch] = (0, _react.useState)("");
+    const [pokemon, setPokemon] = (0, _react.useState)();
+    const changeHandler = (e)=>{
+        setSearch(e.target.value);
+    };
+    const handlePokemonSearch = async ()=>{
+        let pokemonInfo = await pokemonFetch(search);
+        setPokemon(pokemonInfo);
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
-            "Hello world!",
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _button.Button), {
-                children: "Search a pokemon"
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _input.Input), {
+                        placeholder: "search pokemon",
+                        onChange: changeHandler
+                    }, void 0, false, {
+                        fileName: "src/App.tsx",
+                        lineNumber: 45,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _button.Button), {
+                        onClick: handlePokemonSearch,
+                        children: "Search a pokemon"
+                    }, void 0, false, {
+                        fileName: "src/App.tsx",
+                        lineNumber: 46,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/App.tsx",
+                lineNumber: 44,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _pokemonCard.PokemonCard), {
+                pokemonInfo: pokemon
             }, void 0, false, {
                 fileName: "src/App.tsx",
-                lineNumber: 7,
+                lineNumber: 48,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/App.tsx",
-        lineNumber: 5,
+        lineNumber: 43,
         columnNumber: 5
     }, this);
 }
+_s(App, "/SQYsneGbKjk5hcnqYpJLGYNy0Y=");
 _c = App;
 var _c;
 $RefreshReg$(_c, "App");
@@ -27249,7 +27297,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@/components/ui/button":"dFfDQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"dFfDQ":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","@/components/ui/button":"dFfDQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq","./components/PokemonCard":"csGKH","@/components/ui/input":"8fErL"}],"dFfDQ":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$c4cc = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -32467,6 +32515,101 @@ function registerExportsForReactRefresh(module1) {
     }
 }
 
-},{"7422ead32dcc1e6b":"786KC"}]},["94b1M","1xC6H","4aBH6"], "4aBH6", "parcelRequirea8e9")
+},{"7422ead32dcc1e6b":"786KC"}],"csGKH":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$d16f = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$d16f.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "PokemonCard", ()=>PokemonCard);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+const PokemonCard = ({ pokemonInfo })=>{
+    let avatar = pokemonInfo?.sprites.front_default;
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: pokemonInfo?.id
+            }, void 0, false, {
+                fileName: "src/components/PokemonCard.tsx",
+                lineNumber: 11,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: pokemonInfo?.name
+            }, void 0, false, {
+                fileName: "src/components/PokemonCard.tsx",
+                lineNumber: 12,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                    src: avatar,
+                    alt: ""
+                }, void 0, false, {
+                    fileName: "src/components/PokemonCard.tsx",
+                    lineNumber: 19,
+                    columnNumber: 9
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/PokemonCard.tsx",
+                lineNumber: 18,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/PokemonCard.tsx",
+        lineNumber: 10,
+        columnNumber: 5
+    }, undefined);
+};
+_c = PokemonCard;
+var _c;
+$RefreshReg$(_c, "PokemonCard");
+
+  $parcel$ReactRefreshHelpers$d16f.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"8fErL":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$aeff = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$aeff.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Input", ()=>Input);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _utils = require("@/lib/utils");
+const Input = /*#__PURE__*/ _react.forwardRef(_c = ({ className, type, ...props }, ref)=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+        type: type,
+        className: (0, _utils.cn)("flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300", className),
+        ref: ref,
+        ...props
+    }, void 0, false, {
+        fileName: "@/components/ui/input.tsx",
+        lineNumber: 11,
+        columnNumber: 7
+    }, undefined);
+});
+_c1 = Input;
+Input.displayName = "Input";
+var _c, _c1;
+$RefreshReg$(_c, "Input$React.forwardRef");
+$RefreshReg$(_c1, "Input");
+
+  $parcel$ReactRefreshHelpers$aeff.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@/lib/utils":"3wBKO","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}]},["94b1M","1xC6H","4aBH6"], "4aBH6", "parcelRequire1983")
 
 //# sourceMappingURL=index.2d3ace14.js.map
