@@ -15,20 +15,17 @@ export type PokemonInfo = {
 };
 
 export const pokemonFetch = async (searchPok: string) => {
-  try {
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${searchPok}`
-    );
-    const jsonData = await response.json();
-    return jsonData;
-  } catch {
-    console.log("error");
-  }
+  const response = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/${searchPok}`
+  );
+  const jsonData = await response.json();
+  return jsonData;
 };
 
 export function App() {
   const [search, setSearch] = useState("");
   const [pokemon, setPokemon] = useState<PokemonInfo | undefined>();
+  const [error, setError] = useState<string | null>(null);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -36,23 +33,30 @@ export function App() {
 
   const handlePokemonSearch = async () => {
     let searchLowCase = search.toLowerCase();
-    let pokemonInfo: PokemonInfo = await pokemonFetch(searchLowCase);
-    setPokemon(pokemonInfo);
+    try {
+      let pokemonInfo: PokemonInfo = await pokemonFetch(searchLowCase);
+      setPokemon(pokemonInfo);
+      setError(null);
+    } catch {
+      setError("Sorry, there is no such pokemon name");
+      setPokemon(undefined);
+    }
   };
 
   return (
     <div className="flex min-w-full min-h-full h-screen items-center justify-center flex-col bg-slate-700">
-      <div className="flex items-center content-around w-[720px] h-[480px] bg-slate-600 flex-col rounded-xl">
-        <div className="flex flex-row justify-center h-1/3 mt-5">
+      <div className="flex w-[720px] h-[480px] bg-slate-600 flex-col rounded-xl p-5">
+        <div className="flex flex-row justify-center my-5">
           <Input
-            placeholder="search pokemon"
+            placeholder="Pokemon name"
             onChange={changeHandler}
-            className="mx-2 my-4"
+            className="mr-4 my-4"
           ></Input>
-          <Button onClick={handlePokemonSearch} className="mx-2 my-4">
-            Search a pokemon
+          <Button onClick={handlePokemonSearch} className="my-4">
+            Search
           </Button>
         </div>
+        {Error ? <div className="text-slate-400">{error}</div> : <div></div>}
         {pokemon ? (
           <PokemonCard pokemonInfo={pokemon} />
         ) : (
