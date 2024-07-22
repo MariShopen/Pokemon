@@ -35,17 +35,30 @@ export function App() {
   };
 
   const handlePokemonSearch = async () => {
-    let pokemonInfo: PokemonInfo = await pokemonFetch(search);
+    let searchLowCase = search.toLowerCase();
+    let pokemonInfo: PokemonInfo = await pokemonFetch(searchLowCase);
     setPokemon(pokemonInfo);
   };
 
   return (
-    <div>
-      <div>
-        <Input placeholder="search pokemon" onChange={changeHandler}></Input>
-        <Button onClick={handlePokemonSearch}>Search a pokemon</Button>
+    <div className="flex min-w-full min-h-full h-screen items-center justify-center flex-col bg-slate-700">
+      <div className="flex items-center content-around w-[720px] h-[480px] bg-slate-600 flex-col rounded-xl">
+        <div className="flex flex-row justify-center h-1/3 mt-5">
+          <Input
+            placeholder="search pokemon"
+            onChange={changeHandler}
+            className="mx-2 my-4"
+          ></Input>
+          <Button onClick={handlePokemonSearch} className="mx-2 my-4">
+            Search a pokemon
+          </Button>
+        </div>
+        {pokemon ? (
+          <PokemonCard pokemonInfo={pokemon} />
+        ) : (
+          <div className="h-3/4"></div>
+        )}
       </div>
-      <PokemonCard pokemonInfo={pokemon} />
     </div>
   );
 }

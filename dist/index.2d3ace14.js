@@ -27244,46 +27244,64 @@ function App() {
         setSearch(e.target.value);
     };
     const handlePokemonSearch = async ()=>{
-        let pokemonInfo = await pokemonFetch(search);
+        let searchLowCase = search.toLowerCase();
+        let pokemonInfo = await pokemonFetch(searchLowCase);
         setPokemon(pokemonInfo);
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _input.Input), {
-                        placeholder: "search pokemon",
-                        onChange: changeHandler
-                    }, void 0, false, {
-                        fileName: "src/App.tsx",
-                        lineNumber: 45,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _button.Button), {
-                        onClick: handlePokemonSearch,
-                        children: "Search a pokemon"
-                    }, void 0, false, {
-                        fileName: "src/App.tsx",
-                        lineNumber: 46,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/App.tsx",
-                lineNumber: 44,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _pokemonCard.PokemonCard), {
-                pokemonInfo: pokemon
-            }, void 0, false, {
-                fileName: "src/App.tsx",
-                lineNumber: 48,
-                columnNumber: 7
-            }, this)
-        ]
-    }, void 0, true, {
+        className: "flex min-w-full min-h-full h-screen items-center justify-center flex-col bg-slate-700",
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            className: "flex items-center content-around w-[720px] h-[480px] bg-slate-600 flex-col rounded-xl",
+            children: [
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "flex flex-row justify-center h-1/3 mt-5",
+                    children: [
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _input.Input), {
+                            placeholder: "search pokemon",
+                            onChange: changeHandler,
+                            className: "mx-2 my-4"
+                        }, void 0, false, {
+                            fileName: "src/App.tsx",
+                            lineNumber: 47,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _button.Button), {
+                            onClick: handlePokemonSearch,
+                            className: "mx-2 my-4",
+                            children: "Search a pokemon"
+                        }, void 0, false, {
+                            fileName: "src/App.tsx",
+                            lineNumber: 52,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/App.tsx",
+                    lineNumber: 46,
+                    columnNumber: 9
+                }, this),
+                pokemon ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _pokemonCard.PokemonCard), {
+                    pokemonInfo: pokemon
+                }, void 0, false, {
+                    fileName: "src/App.tsx",
+                    lineNumber: 57,
+                    columnNumber: 11
+                }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "h-3/4"
+                }, void 0, false, {
+                    fileName: "src/App.tsx",
+                    lineNumber: 59,
+                    columnNumber: 11
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "src/App.tsx",
+            lineNumber: 45,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
         fileName: "src/App.tsx",
-        lineNumber: 43,
+        lineNumber: 44,
         columnNumber: 5
     }, this);
 }
@@ -32528,20 +32546,47 @@ parcelHelpers.export(exports, "PokemonCard", ()=>PokemonCard);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 const PokemonCard = ({ pokemonInfo })=>{
     let avatar = pokemonInfo?.sprites.front_default;
+    let weightKg = pokemonInfo?.weight / 10;
+    let heightM = pokemonInfo?.height / 10;
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                children: pokemonInfo?.id
-            }, void 0, false, {
+                children: [
+                    "#",
+                    pokemonInfo?.id
+                ]
+            }, void 0, true, {
                 fileName: "src/components/PokemonCard.tsx",
-                lineNumber: 11,
+                lineNumber: 13,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: pokemonInfo?.name
             }, void 0, false, {
                 fileName: "src/components/PokemonCard.tsx",
-                lineNumber: 12,
+                lineNumber: 14,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    "Weight ",
+                    weightKg,
+                    " kg"
+                ]
+            }, void 0, true, {
+                fileName: "src/components/PokemonCard.tsx",
+                lineNumber: 15,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    "Height ",
+                    heightM,
+                    " m"
+                ]
+            }, void 0, true, {
+                fileName: "src/components/PokemonCard.tsx",
+                lineNumber: 16,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -32550,18 +32595,18 @@ const PokemonCard = ({ pokemonInfo })=>{
                     alt: ""
                 }, void 0, false, {
                     fileName: "src/components/PokemonCard.tsx",
-                    lineNumber: 19,
+                    lineNumber: 21,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/PokemonCard.tsx",
-                lineNumber: 18,
+                lineNumber: 20,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/PokemonCard.tsx",
-        lineNumber: 10,
+        lineNumber: 12,
         columnNumber: 5
     }, undefined);
 };
@@ -32590,7 +32635,7 @@ var _utils = require("@/lib/utils");
 const Input = /*#__PURE__*/ _react.forwardRef(_c = ({ className, type, ...props }, ref)=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
         type: type,
-        className: (0, _utils.cn)("flex h-9 w-full rounded-md border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300", className),
+        className: (0, _utils.cn)("flex h-9 w-full rounded-md border bg-slate-300 border-slate-400 px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300", className),
         ref: ref,
         ...props
     }, void 0, false, {
