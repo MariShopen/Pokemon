@@ -26,7 +26,7 @@ type SearchSimilarInfo = {
 
 export const pokemonFetch = async (searchPok: string | number) => {
   const response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/${searchPok}`
+    `https://pokeapi.co/api/v2/pokemon/${searchPok}`,
   );
   const jsonData = await response.json();
   return jsonData;

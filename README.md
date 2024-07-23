@@ -15,9 +15,4 @@
 ## Things which are implemented
 
 - User can enter a Pokémon name and search some information about it
-- 
-
-
-
-
-
+-
