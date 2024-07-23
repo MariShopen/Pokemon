@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { PokemonCard } from "./components/PokemonCard";
 import { Input } from "@/components/ui/input";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import Fuse from "fuse.js";
+import { pokemonList } from "./components/pokemonList_ad";
+import { pokemonList1 } from "src/components/pokemonList";
 
 export type PokemonInfo = {
   id: number;
@@ -13,6 +16,12 @@ export type PokemonInfo = {
   sprites: any;
   stats: any[];
   types: any[];
+};
+
+type SearchSimilarInfo = {
+  item: string[];
+  refIndex: number;
+  score?: number;
 };
 
 export const pokemonFetch = async (searchPok: string | number) => {
@@ -27,12 +36,32 @@ export function App() {
   const [search, setSearch] = useState("");
   const [pokemon, setPokemon] = useState<PokemonInfo | undefined>();
   const [error, setError] = useState<string | null>(null);
+  const [searchSimilar, setSearchSimilar] = useState<SearchSimilarInfo[]>();
+
+  const searchFilter = () => {
+    const options = {
+      includeScore: true,
+      keys: ["0"],
+    };
+    const fuse = new Fuse(pokemonList, options);
+    const result = fuse.search(search);
+    return result;
+  };
+
+  useEffect(() => {
+    setSearchSimilar(searchFilter());
+  }, [search]);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
-  const handlePokemonSearch = async () => {
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    handlePokemonSearch(search);
+  };
+
+  const handlePokemonSearch = async (search: string) => {
     let searchLowCase = search.toLowerCase();
     try {
       let pokemonInfo: PokemonInfo = await pokemonFetch(searchLowCase);
@@ -79,13 +108,49 @@ export function App() {
   return (
     <div className="flex min-w-full min-h-full h-screen items-center justify-center flex-col bg-slate-700">
       <div className="flex w-[720px] h-[480px] bg-slate-600 flex-col rounded-xl p-5">
-        <div className="flex flex-row justify-center mb-5">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-row justify-center mb-3"
+        >
           <Input
             placeholder="Pokemon name"
+            value={search}
             onChange={changeHandler}
             className="mr-4"
           ></Input>
-          <Button onClick={handlePokemonSearch}>Search</Button>
+          <Button type="submit">Search</Button>
+        </form>
+        <div className="flex flex-row">
+          <Button
+            onClick={() => {
+              setSearch(searchSimilar?.[0]?.item?.[0]);
+              handlePokemonSearch(searchSimilar?.[0]?.item?.[0]);
+            }}
+            variant="ghost"
+            className="mb-3"
+          >
+            {searchSimilar?.[0]?.item?.[0]}
+          </Button>
+          <Button
+            onClick={() => {
+              setSearch(searchSimilar?.[1]?.item?.[0]);
+              handlePokemonSearch(searchSimilar?.[1]?.item?.[0]);
+            }}
+            variant="ghost"
+            className="mb-3"
+          >
+            {searchSimilar?.[1]?.item?.[0]}
+          </Button>
+          <Button
+            onClick={() => {
+              setSearch(searchSimilar?.[2]?.item?.[0]);
+              handlePokemonSearch(searchSimilar?.[2]?.item?.[0]);
+            }}
+            variant="ghost"
+            className="mb-3"
+          >
+            {searchSimilar?.[2]?.item?.[0]}
+          </Button>
         </div>
         {Error ? <div className="text-slate-400">{error}</div> : <div></div>}
         {pokemon ? (

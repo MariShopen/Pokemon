@@ -2,8 +2,6 @@ import { PokemonInfo } from "../App";
 import { Button } from "@/components/ui/button";
 export type PokemonCardProps = {
   pokemonInfo?: PokemonInfo;
-  onClickNext?: () => unknown;
-  onClickPrevious?: () => unknown;
 };
 export const PokemonCard: React.FC<PokemonCardProps> = ({ pokemonInfo }) => {
   let avatar = pokemonInfo?.sprites.other["official-artwork"].front_default;
@@ -15,7 +13,7 @@ export const PokemonCard: React.FC<PokemonCardProps> = ({ pokemonInfo }) => {
       <div>{pokemonInfo?.name}</div>
       <div>Weight {weightKg} kg</div>
       <div>Height {heightM} m</div>
-      <div>
+      <div className="mt-5">
         <img className="h-[250px] w-[250px]" src={avatar} alt="" />
       </div>
     </div>
