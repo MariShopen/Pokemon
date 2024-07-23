@@ -117,8 +117,11 @@ export function App() {
             value={search}
             onChange={changeHandler}
             className="mr-4"
+            data-testid="input"
           ></Input>
-          <Button type="submit">Search</Button>
+          <Button type="submit" data-testid="button">
+            Search
+          </Button>
         </form>
         <div className="flex flex-row">
           <Button
@@ -126,6 +129,7 @@ export function App() {
               setSearch(searchSimilar?.[0]?.item?.[0]);
               handlePokemonSearch(searchSimilar?.[0]?.item?.[0]);
             }}
+            data-testid="hitButton"
             variant="ghost"
             className="mb-3"
           >
