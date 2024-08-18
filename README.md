@@ -24,7 +24,8 @@
 - “Previous” & “Next” buttons, that switch to the previous/next Pokémon, based on their id number
 - Text-based search feature implemented via buttons under the search input, using fuse.js
 - Two automated tests, for the submit feature and text-based search feature, using Playwright
+- Caching mechanism to prevent making a request to https://pokeapi.co each time with localStorage
 
 ## Things which are not implemented
-- Not build a caching mechanism to prevent making a request to https://pokeapi.co each time we search for a Pokémon due to lack of time. If I had more time, I would use pokeapi-js-wrapper for Browser-side with auto caching or localStorage.
+- Check the Data in localStarage for being out of date. This API doesn't have timestamps, so external services need to be used.
 
