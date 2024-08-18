@@ -66,15 +66,27 @@ export function App() {
 
   const handlePokemonSearch = async (search: string) => {
     const searchLowCase = search.toLowerCase();
-    try {
-      const pokemonInfo: PokemonInfo = await pokemonFetch(searchLowCase);
+    if (localStorage.getItem(searchLowCase) != null) {
+      const pokemonInfo: PokemonInfo = JSON.parse(
+        localStorage.getItem(searchLowCase)
+      );
       setPokemon(pokemonInfo);
-      setError(null);
-    } catch {
-      setError("Sorry, there is no such pokemon name");
-      setPokemon(undefined);
+    }
+    if (localStorage.getItem(searchLowCase) == null) {
+      try {
+        const pokemonInfo: PokemonInfo = await pokemonFetch(searchLowCase);
+        const pokemonInfoJson: string = JSON.stringify(pokemonInfo);
+        localStorage.setItem(searchLowCase, pokemonInfoJson);
+        setPokemon(pokemonInfo);
+        setError(null);
+      } catch {
+        setError("Sorry, there is no such pokemon name");
+        setPokemon(undefined);
+      }
     }
   };
+
+  //set item to local storage
 
   const handlePokemonPrevious = async () => {
     let previousPokemonId: number;
