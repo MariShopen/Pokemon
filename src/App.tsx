@@ -5,16 +5,19 @@ import { Input } from "@/components/ui/input";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import Fuse from "fuse.js";
 import { pokemonList } from "./components/pokemonList_ad";
-import { pokemonList1 } from "src/components/pokemonList";
 
 export type PokemonInfo = {
   id: number;
   name: string;
   weight: number;
   height: number;
+  // eslint-disable-next-line
   abilities: any[];
+  // eslint-disable-next-line
   sprites: any;
+  // eslint-disable-next-line
   stats: any[];
+  // eslint-disable-next-line
   types: any[];
 };
 
@@ -26,7 +29,7 @@ type SearchSimilarInfo = {
 
 export const pokemonFetch = async (searchPok: string | number) => {
   const response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/${searchPok}`,
+    `https://pokeapi.co/api/v2/pokemon/${searchPok}`
   );
   const jsonData = await response.json();
   return jsonData;
@@ -62,9 +65,9 @@ export function App() {
   };
 
   const handlePokemonSearch = async (search: string) => {
-    let searchLowCase = search.toLowerCase();
+    const searchLowCase = search.toLowerCase();
     try {
-      let pokemonInfo: PokemonInfo = await pokemonFetch(searchLowCase);
+      const pokemonInfo: PokemonInfo = await pokemonFetch(searchLowCase);
       setPokemon(pokemonInfo);
       setError(null);
     } catch {
@@ -80,7 +83,7 @@ export function App() {
       previousPokemonId = 1025;
     }
     try {
-      let pokemonInfo: PokemonInfo = await pokemonFetch(previousPokemonId);
+      const pokemonInfo: PokemonInfo = await pokemonFetch(previousPokemonId);
       setPokemon(pokemonInfo);
       setError(null);
     } catch {
@@ -96,7 +99,7 @@ export function App() {
       nextPokemonId = 1;
     }
     try {
-      let pokemonInfo: PokemonInfo = await pokemonFetch(nextPokemonId);
+      const pokemonInfo: PokemonInfo = await pokemonFetch(nextPokemonId);
       setPokemon(pokemonInfo);
       setError(null);
     } catch {
